@@ -1,0 +1,13 @@
+
+{% extends 'base.html'%}
+
+{% block content%}
+<!--<h1>Tickets by : {{view.kwargs.username}} ({{ tickets.count}})</h1>-->
+
+{% for ticket in tickets %}
+<article class="media content-section">
+ {{ticket.title}}
+</article>
+{% endfor %}
+{%endblock content%}
+
