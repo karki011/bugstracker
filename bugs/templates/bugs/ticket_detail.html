@@ -2,32 +2,47 @@
 {% block content%}
 
 
-
 <div class="card">
-  <div class="card-header">
-     Title: {{object.id}}- {{ object.title }}
-      <small class="text-muted">created by: {{object.date_created|date:"F d, Y" }}</small>
+    <div class="card-header">
+        Title: {{object.id}}- {{ object.title }}
+        <small class="text-muted">created by: {{object.date_created|date:"F d, Y" }}</small>
 
-  </div>
+    </div>
     <div class="card-body">
-           <div class="dropdown show text-right">
-        <a aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#"
-           id="dropdownMenuLink" role="button">
-            Dropdown link
-        </a>
+        <div class="dropdown show text-right">
+            <a aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle"
+               data-toggle="dropdown" href="#"
+               id="dropdownMenuLink" role="button">
+                Dropdown link
+            </a>
 
-        <div aria-labelledby="dropdownMenuLink" class="dropdown-menu">
-           <a  class="btn btn-outline-secondary" href="{%url 'ticketupdate' object.id%}">Edit</a>
-            <a class="dropdown-item" href="{% url 'assigntome' object.id %}">Assign to me</a>
-<!--            <a class="dropdown-item" href="#">Assign</a>-->
+            <div aria-labelledby="dropdownMenuLink" class="dropdown-menu">
+                <a class="btn btn-outline-secondary" href="{%url 'ticketupdate' object.id%}">Edit</a>
+                {% if object.user_completed%}
+                <a class="dropdown-item" href="{% url 'returnticket' object.id %}">Reopen Ticket</a>
+                {%elif object.user_assigned %}
+                <a class="dropdown-item" href="{% url 'completedticket' object.id %}">Competed Ticket</a>
+                <a class="dropdown-item" href="{% url 'returnticket' object.id %}">Return Ticket</a>
+                {%else%}
+                <a class="dropdown-item" href="{% url 'assigntome' object.id %}">Assign to me</a>
+                {%endif%}
+                  <a class="dropdown-item" href="{% url 'invalidticket' object.id %}">Mark Invalid</a>
+
+            </div>
         </div>
     </div>
+    <div class="card-body">
+        <h5 class="card-title">Problem description: {{object.description}}</h5>
+        <p class="card-text">status: {{ object.status }}</p>
+        {% if object.user_assigned%}
+
+        <p class="card-text">Assigned By: {{ object.user_assigned }}</p>
+        {%endif%}
+
+        {% if object.user_completed%}
+        <p class="card-text">Completed By: {{ object.user_completed }}</p>
+        {%endif%}
+        <a class="btn btn-primary" href="{% url 'userticket' ticket.created_by %}">Created by: {{object.created_by}}</a>
     </div>
-  <div class="card-body">
-    <h5 class="card-title">Problem description: {{object.description}}</h5>
-    <p class="card-text">status: {{ object.status }}</p>
-    <p class="card-text">Assigned to: {{ object.user_assigned }}</p>
-    <a href="{% url 'userticket' ticket.created_by %}" class="btn btn-primary">Created by: {{object.created_by}}</a>
-  </div>
 </div>
 {%endblock content%}

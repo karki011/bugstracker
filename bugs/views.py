@@ -60,5 +60,31 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
 def ticket_assigned_to_me(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.user_assigned = request.user
+    ticket.status = "IN PROGRESS"
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
+
+
+def returnticket(request, pk):
+    ticket = Ticket.objects.get(pk=pk)
+    ticket.user_assigned = ticket.clean_fields()
+    ticket.user_completed = ticket.clean_fields()
+    ticket.status = "NEW"
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
+
+
+def completeticket(request, pk):
+    ticket = Ticket.objects.get(pk=pk)
+    ticket.status = "DONE"
+    ticket.user_completed = request.user
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
+
+def invalidticket(request, pk):
+    ticket = Ticket.objects.get(pk=pk)
+    ticket.status = "INVALID"
+    ticket.user_assigned = request.user
+    ticket.user_completed = request.user
     ticket.save()
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
