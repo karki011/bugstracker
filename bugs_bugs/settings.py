@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bugs.apps.BugsConfig',
     'account.apps.AccountConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,5 @@ STATIC_URL = '/static/'
 
 # custom user
 AUTH_USER_MODEL = "account.Account"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
