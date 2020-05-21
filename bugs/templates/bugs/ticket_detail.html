@@ -5,7 +5,7 @@
 
 <div class="card">
   <div class="card-header">
-     Title: {{ object.title }}
+     Title: {{object.id}}- {{ object.title }}
       <small class="text-muted">created by: {{object.date_created|date:"F d, Y" }}</small>
 
   </div>
@@ -18,7 +18,7 @@
 
         <div aria-labelledby="dropdownMenuLink" class="dropdown-menu">
            <a  class="btn btn-outline-secondary" href="{%url 'ticketupdate' object.id%}">Edit</a>
-            <a class="dropdown-item" href="#">Assign to me</a>
+            <a class="dropdown-item" href="{% url 'assigntome' object.id %}">Assign to me</a>
 <!--            <a class="dropdown-item" href="#">Assign</a>-->
         </div>
     </div>
@@ -26,7 +26,8 @@
   <div class="card-body">
     <h5 class="card-title">Problem description: {{object.description}}</h5>
     <p class="card-text">status: {{ object.status }}</p>
-    <a href="#" class="btn btn-primary">Created by: {{object.created_by}}</a>
+    <p class="card-text">Assigned to: {{ object.user_assigned }}</p>
+    <a href="{% url 'userticket' ticket.created_by %}" class="btn btn-primary">Created by: {{object.created_by}}</a>
   </div>
 </div>
 {%endblock content%}

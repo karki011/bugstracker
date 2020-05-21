@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from account.models import Account
 from bugs.models import Ticket
@@ -55,3 +55,10 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+
+def ticket_assigned_to_me(request, pk):
+    ticket = Ticket.objects.get(pk=pk)
+    ticket.user_assigned = request.user
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
