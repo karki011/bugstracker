@@ -62,7 +62,9 @@ class UserTicketListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(Account, username=self.kwargs.get('username'))
-        return Ticket.objects.filter(created_by=user).order_by('-date_created')
+        return Ticket.objects.filter(created_by=user).order_by('date_created')
+
+
 
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
@@ -96,6 +98,7 @@ def returnticket(request, pk):
 
 def completeticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
+    # ticket.user_assigned = ticket.clean_fields()
     ticket.status = "DONE"
     ticket.user_completed = request.user
     messages.success(request, f'You have marked this ticket as completed!')

@@ -1,13 +1,149 @@
-
 {% extends 'base.html'%}
 
 {% block content%}
 <!--<h1>Tickets by : {{view.kwargs.username}} ({{ tickets.count}})</h1>-->
 
-{% for ticket in tickets %}
-<article class="media content-section">
- {{ticket.title}}
-</article>
-{% endfor %}
+
+<div class="jumbotron jumbotron-fluid mt-3">
+    <div class="container">
+        <h1 class="display-5 text-center mb-3">REPORTED TICKETS - {{ tickets.count}}</h1>
+        <div class="table-responsive-md card">
+            <table class="table table-bordered table-light table-hover">
+                <thead class="bg-primary">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Reported By:</th>
+                    <th scope="col">Assigned To::</th>
+                    <th scope="col">Date Created:</th>
+                    <th scope="col">Status:</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for ticket in tickets %}
+                {% if ticket.created_by %}
+                <tr>
+                    <th scope="row">{{ticket.id}}</th>
+                    <th scope="row">
+                        <a href="{% url 'ticketdetail' ticket.id %}">
+                            {{ticket.title}}
+                        </a>
+                    </th>
+                    <th scope="row">
+                        <a href="{% url 'userticket' ticket.created_by %}">
+                            {{ticket.created_by}}
+                        </a>
+                    </th>
+                    <th scope="row">
+                        <a href="{% url 'userticket' ticket.user_assigned %}">
+                            {{ticket.user_assigned}}
+                        </a>
+                    </th>
+                    <th scope="row">{{ticket.date_created}}</th>
+                    <th scope="row">{{ticket.status}}</th>
+
+                </tr>
+                {%endif%}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-5 text-center mb-3">IN PROGRESS TICKETS </h1>
+        <div class="table-responsive-md card">
+            <table class="table table-bordered table-light table-hover">
+                <thead class="btn-warning">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Reported By:</th>
+                    <th scope="col">Assigned To::</th>
+                    <th scope="col">Date Created:</th>
+                    <th scope="col">Status:</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for ticket in tickets %}
+                {% if  ticket.user_assigned == ticket.created_by and ticket.status == 'IN PROGRESS' %}
+                <tr>
+                    <th scope="row">{{ticket.id}}</th>
+                    <th scope="row">
+                        <a href="{% url 'ticketdetail' ticket.id %}">
+                            {{ticket.title}}
+                        </a>
+                    </th>
+                    <th scope="row">
+                        <a href="{% url 'userticket' ticket.created_by %}">
+                            {{ticket.created_by}}
+                        </a>
+                    </th>
+                    <th scope="row">
+                        <a href="{% url 'userticket' ticket.user_assigned %}">
+                            {{ticket.user_assigned}}
+                        </a>
+                    </th>
+                    <th scope="row">{{ticket.date_created}}</th>
+                    <th scope="row">{{ticket.status}}</th>
+
+                </tr>
+                {%endif%}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-5 text-center mb-3">COMPLETED TICKETS</h1>
+        <div class="table-responsive-md card">
+            <table class="table table-bordered table-light table-hover">
+                <thead class="btn-success">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Reported By:</th>
+                    <th scope="col">Date Created:</th>
+                    <th scope="col">Status:</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for ticket in tickets %}
+                {% if ticket.user_completed == ticket.created_by and ticket.status == 'DONE' %}
+                <tr>
+                    <th scope="row">{{ticket.id}}</th>
+                    <th scope="row">
+                        <a href="{% url 'ticketdetail' ticket.id %}">
+                            {{ticket.title}}
+                        </a>
+                    </th>
+                    <th scope="row">
+                        <a href="{% url 'userticket' ticket.created_by %}">
+                            {{ticket.created_by}}
+                        </a>
+                    </th>
+
+                    <th scope="row">{{ticket.date_created}}</th>
+                    <th scope="row">{{ticket.status}}</th>
+
+                </tr>
+                {%endif%}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
 {%endblock content%}
 
