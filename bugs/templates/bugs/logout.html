@@ -1,9 +1,15 @@
 {%extends 'base.html'%}
 {% block content%}
-<h2>You have been logout!</h2>
-<div class="border-top pt-3">
-    <small class="text-muted">
-        <a  href="{%url 'login'%}">Log in Again</a>
-    </small>
+
+<div class="jumbotron text-center m-4 ">
+  <h1 class="display-4 text-info">
+     <strong>
+         You have been logout!
+     </strong>
+  </h1>
+  <hr class="my-4">
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{%url 'login'%}" role="button">Log in Again</a>
+  </p>
 </div>
 {%endblock content%}
