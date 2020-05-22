@@ -1,6 +1,8 @@
 {%extends 'base.html'%}
 {% load crispy_forms_tags%}
 {% block content%}
+<div class="jumbotron mt-5">
+
     <form action="" method="post">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -9,11 +11,12 @@
             </legend>
             {{form|crispy}}
         </fieldset>
-        <div class="form-group">
-            <a class="btn btn-outline-secondary" href="javascript:window.history.back()">Cancel</a>
-            <button class="btn btn-outline-info" type="submit">Submit</button>
+        <div class="form-group text-center">
+            <a class="btn btn-outline-secondary bg-danger text-white" href="javascript:window.history.back()">Cancel</a>
+            <button class="btn btn-outline-info bg-primary text-white" type="submit">Submit</button>
         </div>
     </form>
 
+</div>
 
 {%endblock content%}
