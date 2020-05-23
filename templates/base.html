@@ -16,7 +16,10 @@
 <body>
 <div class="container-fluid mt-3 sticky-top">
     <div class="row text-center justify-content-center">
-        <div class="mr-1 col-sm-12  col-md-6 col-lg-3 bg-dark status-count ">
+
+
+        {% if user.is_authenticated%}
+         <div class="mr-1 col-sm-12  col-md-6 col-lg-3 bg-dark status-count ">
             <a class="text-white display-3" href="/">
                 Home
             </a>
@@ -26,7 +29,6 @@
                 Submit Ticket
             </a>
         </div>
-        {% if user.is_authenticated%}
         <div class="mr-1 col-sm-12  col-md-6 col-lg-3 bg-danger status-count  ">
             <a class="text-white display-3" href="{%url 'logout'%}">
                 Logout
