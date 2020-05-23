@@ -22,9 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4r^8=5jx=r*z!^#p=_y@pdmu$=l4xs52+9rx%puv6z&23m7g*p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['161.35.115.86']
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['161.35.115.86']
 
 # Application definition
 
@@ -72,7 +75,7 @@ WSGI_APPLICATION = 'bugs_bugs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-if DEBUG == True:
+if DEBUG :
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
