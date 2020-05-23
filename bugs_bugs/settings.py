@@ -24,7 +24,7 @@ SECRET_KEY = '4r^8=5jx=r*z!^#p=_y@pdmu$=l4xs52+9rx%puv6z&23m7g*p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['161.35.115.86']
 
 # Application definition
 
