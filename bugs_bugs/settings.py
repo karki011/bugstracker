@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'login_required.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -127,3 +128,7 @@ LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 
+LOGIN_REQUIRED_IGNORE_VIEW_NAMES = [
+    'login',
+    'admin',
+]

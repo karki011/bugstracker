@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from account.models import Account
 from bugs.models import Ticket
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -13,7 +12,6 @@ def get_ticket_status(filterby):
     return ticket_filter
 
 
-@login_required
 def home(request):
     html = 'bugs/home.html'
     new_ticket = get_ticket_status('NEW')
@@ -31,11 +29,11 @@ def home(request):
     return render(request, html, context)
 
 
-class TicketDetailView(LoginRequiredMixin, DetailView):
+class TicketDetailView( DetailView):
     model = Ticket
 
 
-class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class TicketUpdateView(UserPassesTestMixin, UpdateView):
     model = Ticket
     fields = ['title', 'description']
 
@@ -55,7 +53,7 @@ class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class UserTicketListView(LoginRequiredMixin, ListView):
+class UserTicketListView(ListView):
     model = Ticket
     template_name = 'bugs/user_ticket.html'
     context_object_name = 'tickets'
@@ -65,7 +63,7 @@ class UserTicketListView(LoginRequiredMixin, ListView):
         return Ticket.objects.filter(created_by=user).order_by('date_created')
 
 
-class TicketCreateView(LoginRequiredMixin, CreateView):
+class TicketCreateView( CreateView):
     model = Ticket
     fields = ['title', 'description']
 
@@ -75,7 +73,6 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-@login_required()
 def ticket_assigned_to_me(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.user_assigned = request.user
@@ -85,7 +82,6 @@ def ticket_assigned_to_me(request, pk):
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
 
 
-@login_required()
 def returnticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.user_assigned = ticket.clean_fields()
@@ -96,7 +92,6 @@ def returnticket(request, pk):
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
 
 
-@login_required()
 def completeticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     # ticket.user_assigned = ticket.clean_fields()
@@ -107,7 +102,6 @@ def completeticket(request, pk):
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
 
 
-@login_required()
 def invalidticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.status = "INVALID"
