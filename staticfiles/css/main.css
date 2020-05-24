@@ -3,7 +3,6 @@
 
 html, body{
   font-family: "IBM Plex Mono", monospace !important;
-    background: #5f2929;
 }
 a{
 text-decoration: none !important;
@@ -17,16 +16,15 @@ nav{
 height: 90px
 }
 .status-count{
+    min-height: 100px;
     text-transform: uppercase;
     font-weight: bolder;
-    font-size: 22px;
-    line-height: 4;
+    line=height: 4;
+     font-size: 30px;
+    line-height: 3;
 }
 
 .top-nav-a{
     font-size: 30px;
     line-height: 3;
-     font-weight: bolder;
-
-
 }

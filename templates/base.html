@@ -15,36 +15,23 @@
 </head>
 <body>
 
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col-sm status-count">-->
-<!--      One of three columns-->
-<!--    </div>-->
-<!--    <div class="col-sm status-count">-->
-<!--      One of three columns-->
-<!--    </div>-->
-<!--    <div class="col-sm status-count">-->
-<!--      One of three columns-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<div class="container-fluid mt-3 sticky-top">
+
+<div class="container-fluid  sticky-top">
     <div class="row text-center justify-content-center">
 
-
         {% if user.is_authenticated%}
-         <div class="mr-1 col-sm-12  col-md-6 col-lg-3 bg-dark status-count ">
-            <a class="text-white " href="/">
+         <div class=" col-sm-12  col-md-6 col-lg-3 bg-dark  ">
+            <a class="text-white top-nav-a" href="/">
                 Home
             </a>
         </div>
-        <div class="mr-1  col-sm col-md-6 col-lg-4  bg-info status-count  ">
-            <a class="text-white " href="{% url 'ticketcreate'%} ">
+        <div class="  col-sm col-md-6 col-lg-4  bg-info   ">
+            <a class="text-white top-nav-a" href="{% url 'ticketcreate'%} ">
                 Submit Ticket
             </a>
         </div>
-        <div class="mr-1 col-sm  col-md-6 col-lg-3 bg-danger status-count  ">
-            <a class="text-white " href="{%url 'logout'%}">
+        <div class=" col-sm  col-md-6 col-lg-3 bg-danger ">
+            <a class="text-white top-nav-a" href="{%url 'logout'%}">
                 Logout
             </a>
         </div>

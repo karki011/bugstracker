@@ -65,8 +65,6 @@ class UserTicketListView(LoginRequiredMixin, ListView):
         return Ticket.objects.filter(created_by=user).order_by('date_created')
 
 
-
-
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket
     fields = ['title', 'description']
@@ -77,6 +75,7 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+@login_required()
 def ticket_assigned_to_me(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.user_assigned = request.user
@@ -86,6 +85,7 @@ def ticket_assigned_to_me(request, pk):
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
 
 
+@login_required()
 def returnticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.user_assigned = ticket.clean_fields()
@@ -96,6 +96,7 @@ def returnticket(request, pk):
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
 
 
+@login_required()
 def completeticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     # ticket.user_assigned = ticket.clean_fields()
@@ -106,6 +107,7 @@ def completeticket(request, pk):
     return HttpResponseRedirect(reverse('ticketdetail', kwargs={'pk': pk}))
 
 
+@login_required()
 def invalidticket(request, pk):
     ticket = Ticket.objects.get(pk=pk)
     ticket.status = "INVALID"
