@@ -8,29 +8,43 @@
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
-    <link href="{% static 'main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/376d9e7b35.js" crossorigin="anonymous"></script>
 
     <title>BUGS!</title>
 </head>
 <body>
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-sm status-count">-->
+<!--      One of three columns-->
+<!--    </div>-->
+<!--    <div class="col-sm status-count">-->
+<!--      One of three columns-->
+<!--    </div>-->
+<!--    <div class="col-sm status-count">-->
+<!--      One of three columns-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 <div class="container-fluid mt-3 sticky-top">
     <div class="row text-center justify-content-center">
 
 
         {% if user.is_authenticated%}
          <div class="mr-1 col-sm-12  col-md-6 col-lg-3 bg-dark status-count ">
-            <a class="text-white display-3" href="/">
+            <a class="text-white " href="/">
                 Home
             </a>
         </div>
-        <div class="mr-1  col-sm-12 col-md-6 col-lg-4  bg-info status-count  ">
-            <a class="text-white display-3" href="{% url 'ticketcreate'%} ">
+        <div class="mr-1  col-sm col-md-6 col-lg-4  bg-info status-count  ">
+            <a class="text-white " href="{% url 'ticketcreate'%} ">
                 Submit Ticket
             </a>
         </div>
-        <div class="mr-1 col-sm-12  col-md-6 col-lg-3 bg-danger status-count  ">
-            <a class="text-white display-3" href="{%url 'logout'%}">
+        <div class="mr-1 col-sm  col-md-6 col-lg-3 bg-danger status-count  ">
+            <a class="text-white " href="{%url 'logout'%}">
                 Logout
             </a>
         </div>

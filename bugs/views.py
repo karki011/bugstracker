@@ -31,7 +31,7 @@ def home(request):
     return render(request, html, context)
 
 
-class TicketDetailView(DetailView):
+class TicketDetailView(LoginRequiredMixin, DetailView):
     model = Ticket
 
 
@@ -55,7 +55,7 @@ class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class UserTicketListView(ListView):
+class UserTicketListView(LoginRequiredMixin, ListView):
     model = Ticket
     template_name = 'bugs/user_ticket.html'
     context_object_name = 'tickets'
