@@ -1,4 +1,4 @@
-##DEMO  <a href='https://www.pythonanywhere.com/user/subashkarki/files/home/subashkarki/bugstracker/bugs_bugs' > Demo </a>
+##  <a href='https://www.pythonanywhere.com/user/subashkarki/files/home/subashkarki/bugstracker/bugs_bugs' > Demo </a>
 
 # a bug tracker application that:
 
